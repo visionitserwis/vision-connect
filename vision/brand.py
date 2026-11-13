@@ -1,14 +1,3 @@
-# 8. the packed program file gets its own name: process VisionConnect.exe instead of rustdesk.exe,
-#    unpacked to %LOCALAPPDATA%\visionconnect (not shared with a portable RustDesk).
-#    One-line patch on purpose: the Windows checkout has CRLF line ends, so patterns must not contain "\n".
-edit("libs/portable/generate.py", [
-    ("    exe: str = os.path.abspath(options.executable)",
-     "    exe: str = os.path.abspath(options.executable); "
-     "exe = (os.replace(exe, os.path.join(os.path.dirname(exe), '%s.exe')) "
-     "or os.path.join(os.path.dirname(exe), '%s.exe')) "
-     "if os.path.basename(exe).lower() == 'rustdesk.exe' else exe" % (APP_NAME, APP_NAME)),
-])
-print("Vision Connect branding, second round applied.")
 #!/usr/bin/env python3
 # Vision Connect - branding applied on top of the unmodified RustDesk sources at build time.
 # Vision IT Serwis (https://visionitserwis.pl). Based on RustDesk, AGPL-3.0.
@@ -131,13 +120,13 @@ edit("flutter/lib/desktop/pages/connection_page.dart", [
 ])
 
 # 8. the packed program file gets its own name: process VisionConnect.exe instead of rustdesk.exe,
-#    unpacked to %LOCALAPPDATA%\visionconnect (not shared with a portable RustDesk)
+#    unpacked to %LOCALAPPDATA%\visionconnect (not shared with a portable RustDesk).
+#    One-line patch on purpose: the Windows checkout has CRLF line ends, so patterns must not contain "\n".
 edit("libs/portable/generate.py", [
-    ("    exe: str = os.path.abspath(options.executable)\n",
-     "    exe: str = os.path.abspath(options.executable)\n"
-     "    if os.path.basename(exe).lower() == 'rustdesk.exe':\n"
-     "        _vc = os.path.join(os.path.dirname(exe), '%s.exe')\n"
-     "        os.replace(exe, _vc)\n"
-     "        exe = _vc\n" % APP_NAME),
+    ("    exe: str = os.path.abspath(options.executable)",
+     "    exe: str = os.path.abspath(options.executable); "
+     "exe = (os.replace(exe, os.path.join(os.path.dirname(exe), '%s.exe')) "
+     "or os.path.join(os.path.dirname(exe), '%s.exe')) "
+     "if os.path.basename(exe).lower() == 'rustdesk.exe' else exe" % (APP_NAME, APP_NAME)),
 ])
 print("Vision Connect branding, second round applied.")
