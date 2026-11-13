@@ -103,3 +103,30 @@ edit("flutter/lib/desktop/pages/desktop_setting_page.dart", [
     ("translate('Slogan_tip'),", "'%s · tel. 600 800 642 · %s'," % (COMPANY, WEBSITE.replace("https://", ""))),
 ])
 print("Vision Connect branding applied.")
+
+# ---- second round (13.11.2026) ----
+# 6. texts: show the name with a space ("Vision Connect") wherever RustDesk's own name was shown
+edit("src/lang.rs", [
+    ("let app_name = crate::get_app_name();", 'let app_name = "%s".to_owned();' % DISPLAY),
+])
+
+# 7. hide the "Powered by RustDesk" line above the logo (the notice stays on the About page)
+#    and the "set up your own server" hint (the Vision Connect server is already built in)
+edit("flutter/lib/common.dart", [
+    ('if (bind.mainGetBuildinOption(key: "hide-powered-by-me") == \'Y\') {', "if (true) {"),
+])
+edit("flutter/lib/desktop/pages/connection_page.dart", [
+    ("offstage: !(!_svcStopped.value &&", "offstage: true || !(!_svcStopped.value &&"),
+])
+
+# 8. the packed program file gets its own name: process VisionConnect.exe instead of rustdesk.exe,
+#    unpacked to %LOCALAPPDATA%\visionconnect (not shared with a portable RustDesk)
+edit("libs/portable/generate.py", [
+    ("    exe: str = os.path.abspath(options.executable)\n",
+     "    exe: str = os.path.abspath(options.executable)\n"
+     "    if os.path.basename(exe).lower() == 'rustdesk.exe':\n"
+     "        _vc = os.path.join(os.path.dirname(exe), '%s.exe')\n"
+     "        os.replace(exe, _vc)\n"
+     "        exe = _vc\n" % APP_NAME),
+])
+print("Vision Connect branding, second round applied.")
