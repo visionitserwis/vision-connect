@@ -130,3 +130,18 @@ edit("libs/portable/generate.py", [
      "if os.path.basename(exe).lower() == 'rustdesk.exe' else exe" % (APP_NAME, APP_NAME)),
 ])
 print("Vision Connect branding, second round applied.")
+
+# ---- third round (14.11.2026) ----
+# 9. remote screen is scaled to fit the local window by default ("adaptive" instead of 1:1 "original"),
+#    so a Full HD office PC fits a smaller laptop screen without changing the remote resolution
+edit("libs/hbb_common/src/config.rs", [
+    ('keys::OPTION_VIEW_STYLE => self.get_string(key, "original", vec!["adaptive"]),',
+     'keys::OPTION_VIEW_STYLE => self.get_string(key, "adaptive", vec!["original"]),'),
+])
+
+# Further small patches live in vision/patches/*.py (run in name order, they can use edit() and copy()).
+import glob
+for _p in sorted(glob.glob(os.path.join(V, "patches", "*.py"))):
+    print("extra patch", os.path.basename(_p))
+    exec(compile(io.open(_p, encoding="utf-8").read(), _p, "exec"))
+print("Vision Connect branding, third round applied.")
