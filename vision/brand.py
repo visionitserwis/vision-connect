@@ -9,7 +9,7 @@ import io, os, re, shutil, sys
 APP_NAME = "VisionConnect"            # no spaces: used as Windows service name and exe name
 DISPLAY = "Vision Connect"
 COMPANY = "Vision IT Serwis"
-SERVER = "albertinowroclaw.synology.me"
+SERVER = "connect.visionitserwis.pl"      # own name (CNAME); move the server = change DNS only
 PUBKEY = "bPf6spCnFkOsPpJMfkktowSfBErAzCDECewL6YTjpmw="   # public key of the Vision Connect server
 WEBSITE = "https://visionitserwis.pl"
 SOURCE = "https://github.com/visionitserwis/vision-connect"
