@@ -5,7 +5,7 @@
 # Nothing is downloaded or installed automatically. The About page shows the release number.
 # Runs after 20_licencja.py (it extends the code added there). Single-line patterns only.
 
-VC_BUILD = 9
+VC_BUILD = 10
 VERSION_PAGE = WEBSITE + "/vision-connect-wersja/"
 
 _p = os.path.join(ROOT, "flutter/lib/common/widgets/dialog.dart")
@@ -61,6 +61,6 @@ edit("flutter/lib/desktop/pages/desktop_home_page.dart", [
 ])
 
 edit("flutter/lib/desktop/pages/desktop_setting_page.dart", [
-    ("child: Text('Licencja: ${", "child: Text('Wydanie $vcBuild · Licencja: ${"),
+    ("child: Text('Abonament: ${", "child: Text('Wydanie $vcBuild · Abonament: ${"),
 ])
 print("Vision Connect: new-version notice, release", VC_BUILD)
