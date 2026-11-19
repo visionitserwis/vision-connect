@@ -333,7 +333,7 @@ fn read_text(path: &PathBuf) -> Option<String> {
 /// or the reason why there is none.
 fn find_licence() -> Result<Licence, String> {
     let mut best: Option<Licence> = None;
-    let mut reason = "brak klucza licencji".to_owned();
+    let mut reason = "brak klucza abonamentu".to_owned();
     if let Ok(entries) = std::fs::read_dir(dir()) {
         for e in entries.flatten() {
             let name = e.file_name().to_string_lossy().to_lowercase();
@@ -387,13 +387,13 @@ fn evaluate() -> Status {
     match find_licence() {
         Ok(l) => {
             let dni = l.do_days - today;
-            let kto = format!("Licencja {} ({})", l.nr, l.klient);
+            let kto = format!("Abonament {} ({})", l.nr, l.klient);
             if dni > WARN_DAYS {
                 Status {
                     stan: "OK",
                     dni,
-                    opis: format!("{} ważna do {} (jeszcze {} dni).", kto, l.do_txt, dni),
-                    krotko: format!("{}, {} - ważna do {}", l.nr, l.klient, l.do_txt),
+                    opis: format!("{} ważny do {} (jeszcze {} dni).", kto, l.do_txt, dni),
+                    krotko: format!("{}, {} - ważny do {}", l.nr, l.klient, l.do_txt),
                 }
             } else if dni >= 0 {
                 Status {
@@ -410,23 +410,23 @@ fn evaluate() -> Status {
                     stan: "ZAPAS",
                     dni,
                     opis: format!(
-                        "{} WYGASŁA {}. Stałe hasło (stały dostęp) zostanie wyłączone za {} dni. Nowy klucz: {}.",
+                        "{} WYGASŁ {}. Stałe hasło (stały dostęp) zostanie wyłączone za {} dni. Nowy klucz: {}.",
                         kto,
                         l.do_txt,
                         GRACE_DAYS + dni,
                         CONTACT
                     ),
-                    krotko: format!("{}, {} - WYGASŁA {}", l.nr, l.klient, l.do_txt),
+                    krotko: format!("{}, {} - WYGASŁ {}", l.nr, l.klient, l.do_txt),
                 }
             } else {
                 Status {
                     stan: "BLOKADA",
                     dni,
                     opis: format!(
-                        "{} wygasła {}. Stałe hasło (stały dostęp) jest WYŁĄCZONE; pomoc na hasło jednorazowe działa. Nowy klucz: {}.",
+                        "{} wygasł {}. Stałe hasło (stały dostęp) jest WYŁĄCZONE; pomoc na hasło jednorazowe działa. Nowy klucz: {}.",
                         kto, l.do_txt, CONTACT
                     ),
-                    krotko: format!("{}, {} - wygasła {}", l.nr, l.klient, l.do_txt),
+                    krotko: format!("{}, {} - wygasł {}", l.nr, l.klient, l.do_txt),
                 }
             }
         }
@@ -437,7 +437,7 @@ fn evaluate() -> Status {
                     stan: "PROBNA",
                     dni: left,
                     opis: format!(
-                        "Stałe hasło (stały dostęp) bez licencji - okres próbny, zostało {} dni. Klucz licencji: {}.",
+                        "Stałe hasło (stały dostęp) bez abonamentu - okres próbny, zostało {} dni. Klucz abonamentu: {}.",
                         left, CONTACT
                     ),
                     krotko: format!("{} - okres próbny, zostało {} dni", powod, left),
@@ -447,7 +447,7 @@ fn evaluate() -> Status {
                     stan: "BLOKADA",
                     dni: left,
                     opis: format!(
-                        "Brak ważnej licencji ({}) - okres próbny minął. Stałe hasło (stały dostęp) jest WYŁĄCZONE; pomoc na hasło jednorazowe działa. Klucz licencji: {}.",
+                        "Brak ważnego abonamentu ({}) - okres próbny minął. Stałe hasło (stały dostęp) jest WYŁĄCZONE; pomoc na hasło jednorazowe działa. Klucz abonamentu: {}.",
                         powod, CONTACT
                     ),
                     krotko: format!("{} - okres próbny minął", powod),
@@ -527,13 +527,13 @@ pub fn set_key(key: &str) -> String {
     if !saved {
         return serde_json::json!({
             "ok": false,
-            "blad": format!("Klucz jest poprawny, ale nie udało się go zapisać w folderze {}. Uruchom program jako administrator albo użyj pliku \"LICENCJA - wpisz klucz\".", d.display()),
+            "blad": format!("Klucz jest poprawny, ale nie udało się go zapisać w folderze {}. Uruchom program jako administrator albo użyj pliku \"ABONAMENT - wpisz klucz\".", d.display()),
         })
         .to_string();
     }
     serde_json::json!({
         "ok": true,
-        "opis": format!("Licencja {} ({}) ważna do {}.", lic.nr, lic.klient, lic.do_txt),
+        "opis": format!("Abonament {} ({}) ważny do {}.", lic.nr, lic.klient, lic.do_txt),
     })
     .to_string()
 }
