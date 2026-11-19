@@ -56,13 +56,13 @@ void vcLicenseDialog({Function()? callback}) {
   gFFI.dialogManager.show((setState, close, context) {
     final opis = (vcLicenseInfo()['opis'] ?? '').toString();
     return CustomAlertDialog(
-      title: Text('Licencja Vision Connect'),
+      title: Text('Abonament Vision Connect'),
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(opis),
           const SizedBox(height: 12.0),
-          Text('Wklej klucz licencji (zaczyna się od VC1-):'),
+          Text('Wklej klucz abonamentu (zaczyna się od VC1-):'),
           const SizedBox(height: 8.0),
           Row(
             children: [
@@ -88,7 +88,7 @@ void vcLicenseDialog({Function()? callback}) {
           final k = controller.text.replaceAll(RegExp(r'\s+'), '');
           if (k.isEmpty) {
             setState(() {
-              msg = 'Wklej klucz licencji.';
+              msg = 'Wklej klucz abonamentu.';
             });
             return;
           }
@@ -101,7 +101,7 @@ void vcLicenseDialog({Function()? callback}) {
           if (res['ok'] == true) {
             callback?.call();
             close();
-            showToast((res['opis'] ?? 'Klucz licencji zapisany.').toString());
+            showToast((res['opis'] ?? 'Klucz abonamentu zapisany.').toString());
           } else {
             setState(() {
               msg = (res['blad'] ?? 'Nie udało się zapisać klucza.').toString();
@@ -128,7 +128,7 @@ edit("flutter/lib/desktop/pages/desktop_home_page.dart", [
      "    final info = vcLicenseInfo();\n"
      "    if (info['pokaz'] != true) return rest;\n"
      "    final card = buildInstallCard(\n"
-     "        'Licencja', (info['opis'] ?? '').toString(), 'Wpisz klucz', () {\n"
+     "        'Abonament', (info['opis'] ?? '').toString(), 'Wpisz klucz', () {\n"
      "      vcLicenseDialog(callback: () => setState(() {}));\n"
      "    });\n"
      "    return Column(mainAxisSize: MainAxisSize.min, children: [card, rest]);\n"
@@ -141,7 +141,7 @@ edit("flutter/lib/desktop/pages/desktop_setting_page.dart", [
     (r"( *)(SelectionArea\(\s*child: Text\('\$\{translate\('Version'\)\}: \$version'\))",
      lambda m: m.group(1) + "InkWell(\n"
      + m.group(1) + "    onTap: () => vcLicenseDialog(callback: () => setState(() {})),\n"
-     + m.group(1) + "    child: Text('Licencja: ${(vcLicenseInfo()['krotko'] ?? '').toString()}',\n"
+     + m.group(1) + "    child: Text('Abonament: ${(vcLicenseInfo()['krotko'] ?? '').toString()}',\n"
      + m.group(1) + "            style: const TextStyle(decoration: TextDecoration.underline))\n"
      + m.group(1) + "        .marginSymmetric(vertical: 4.0)),\n"
      + m.group(1) + m.group(2)),
