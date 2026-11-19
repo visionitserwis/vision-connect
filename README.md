@@ -1,3 +1,7 @@
+> **Vision Connect** – this repository is a modified version of RustDesk, maintained by Vision IT Serwis (https://visionitserwis.pl)
+> and distributed under the same licence, AGPL-3.0. What is changed, how to build it and the list of releases:
+> [vision/README.md](vision/README.md). The original RustDesk README follows.
+
 <p align="center">
   <img src="res/logo-header.svg" alt="RustDesk - Your remote desktop"><br>
   <a href="#raw-steps-to-build">Build</a> •
