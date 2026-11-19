@@ -98,7 +98,7 @@ edit("flutter/lib/desktop/pages/desktop_setting_page.dart", [
     ("decoration: const BoxDecoration(color: Color(0xFF2c8cff)),", "decoration: const BoxDecoration(color: Color(0xFF1668D6)),"),
     ("'Copyright © ${DateTime.now().toString().substring(0, 4)} Purslane Tech Pte. Ltd.\\n$license',",
      "'%s © ${DateTime.now().toString().substring(0, 4)} %s\\n'\n"
-     "                            'Based on RustDesk, Copyright © Purslane Tech Pte. Ltd. Licence: AGPL-3.0.\\n'\n"
+     "                            'Based on RustDesk (modified by Vision IT Serwis, 2026), Copyright © Purslane Tech Pte. Ltd. Licence: AGPL-3.0.\\n'\n"
      "                            'Source code: %s\\n$license'," % (DISPLAY, COMPANY, SOURCE)),
     ("translate('Slogan_tip'),", "'%s · tel. 600 800 642 · %s'," % (COMPANY, WEBSITE.replace("https://", ""))),
 ])
