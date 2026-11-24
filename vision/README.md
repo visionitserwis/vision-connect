@@ -26,6 +26,11 @@ All changes live in the `vision/` folder and are applied to the RustDesk source 
 - `patches/40_polityka.py` – privacy links point to https://visionitserwis.pl/vision-connect-prywatnosc/ (18.11.2026);
 - `patches/50_nowa_wersja.py` – release number and a "new release available" notice read from
   https://visionitserwis.pl/vision-connect-wersja/ (nothing is downloaded automatically) (19.11.2026);
+- `patches/60_bez_instalacji.py` – the program run without installation shows no "Install" card on the home page;
+  unattended access is installed only by the Vision IT Serwis installer (23.11.2026, release 11);
+- `patches/70_szybka_pomoc.py` – "quick help": when the program file name contains `pomoc` (e.g. `VisionConnect-pomoc.exe`)
+  the program starts in the upstream incoming-only mode – a small window with the ID and the one-time password,
+  no outgoing connections, no installation (24.11.2026, release 11);
 - `make_workflow.py` – generates `.github/workflows/vision-connect.yml` (Windows x64 build only)
   from the upstream `flutter-build.yml`.
 
