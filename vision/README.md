@@ -51,6 +51,7 @@ build instructions for Windows (https://rustdesk.com/docs/en/dev/build/windows/)
 |---|---|---|---|
 | 9 | 2026-11-19 | `4dd0be5` | `9b2c5c46c98a83189597f05066cae7ed8b85680b1cdf2dc06145562ca109f449` |
 | 10 | 2026-11-19 | `a22ee97` | `f962fdd0950df68ba8b1de1e364674da6383d1cc85c0374a1388de67395be06f` |
+| 11 | 2026-11-24 | `6d09f2d` | `9f120141cb1d24fcfd6513c426cf8ae4a7baa1c989942d798624bca5c1dcede8` |
 
 The release number is shown in the program: Settings → About ("Wydanie N").
 
