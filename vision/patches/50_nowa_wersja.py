@@ -5,7 +5,7 @@
 # Nothing is downloaded or installed automatically. The About page shows the release number.
 # Runs after 20_licencja.py (it extends the code added there). Single-line patterns only.
 
-VC_BUILD = 10
+VC_BUILD = 11
 VERSION_PAGE = WEBSITE + "/vision-connect-wersja/"
 
 _p = os.path.join(ROOT, "flutter/lib/common/widgets/dialog.dart")
